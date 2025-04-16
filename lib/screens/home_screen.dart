@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rmw/screens/add_transaction_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -30,6 +31,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       backgroundColor: backgroundColor,
+
+      // application top bar
       appBar: AppBar(
         title: const Text(
           'Roast My Wallet',
@@ -56,11 +59,19 @@ class _HomeScreenState extends State<HomeScreen> {
           const SizedBox(width: 8),
         ],
       ),
+
+      // center screen
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            /*
+            three children:
+            1. spends this month
+            2. spends this week
+            3. spends today
+            */
             _buildSpendingCard(
               context: context,
               title: 'Spends this month',
@@ -72,6 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
               primaryTextColor: primaryTextColor,
               secondaryTextColor: secondaryTextColor,
             ),
+
             const SizedBox(height: 16.0),
             _buildSpendingCard(
               context: context,
@@ -84,6 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
               primaryTextColor: primaryTextColor,
               secondaryTextColor: secondaryTextColor,
             ),
+
             const SizedBox(height: 16.0),
             _buildSpendingCard(
               context: context,
@@ -99,27 +112,51 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
+
+      // add transaction button
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const AddTransactionScreen()),
+          );
           print("FAB tapped");
         },
         backgroundColor: accentColor,
         child: const Icon(Icons.add, color: Colors.white),
       ),
+
+      /*
+      bottom navigation bar:
+      1. home - current screen
+      2. transactions - shows all the transactions
+      3. ai insights - shows all the ai insights aggregated
+      4. budgets - shows the budgets that were created
+      5. settings
+      */
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
+          // home
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
           ),
+          // transactions
           BottomNavigationBarItem(
             icon: Icon(Icons.bar_chart),
-            label: 'Stats',
+            label: 'Transactions',
           ),
+          // ai insights
+          BottomNavigationBarItem(
+            icon: Icon(Icons.insights), // Icon for AI Insights
+            label: 'Insights',
+          ),
+          // budgets screen
           BottomNavigationBarItem(
             icon: Icon(Icons.account_balance_wallet_outlined),
-            label: 'Wallet',
+            label: 'Budgets',
           ),
+          // settings screen
           BottomNavigationBarItem(
             icon: Icon(Icons.settings_outlined),
             label: 'Settings',

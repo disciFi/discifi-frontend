@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       title: 'Roast My Wallet',
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        fontFamily: 'Inter',
+        fontFamily: 'DM Sans',
       ),
       home: const HomeScreen(),
       debugShowCheckedModeBanner: false,

@@ -9,6 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  intl: ^0.20.2
 
 dev_dependencies:
   flutter_test:
@@ -23,4 +24,10 @@ flutter:
         - asset: assets/fonts/Inter-VariableFont_opsz,wght.ttf
           weight: 400
         - asset: assets/fonts/Inter-VariableFont_opsz,wght.ttf
+          weight: 700
+    - family: DM Sans
+      fonts:
+        - asset: assets/fonts/DMSans-VariableFont_opsz,wght.ttf
+          weight: 400
+        - asset: assets/fonts/DMSans-VariableFont_opsz,wght.ttf
           weight: 700
