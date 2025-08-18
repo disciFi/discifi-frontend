@@ -40,6 +40,17 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
     {'symbol': '£', 'code': 'GBP'},
     {'symbol': '₹', 'code': 'INR'},
     {'symbol': '¥', 'code': 'JPY'},
+    {'symbol': '¥', 'code': 'JPY'},
+    {'symbol': '¥', 'code': 'JPY'},
+    {'symbol': '¥', 'code': 'JPY'},
+    {'symbol': '¥', 'code': 'JPY'},
+    {'symbol': '¥', 'code': 'JPY'},
+    {'symbol': '¥', 'code': 'JPY'},
+    {'symbol': '¥', 'code': 'JPY'},
+    {'symbol': '¥', 'code': 'JPY'},
+    {'symbol': '¥', 'code': 'JPY'},
+    {'symbol': '¥', 'code': 'JPY'},
+    {'symbol': '¥', 'code': 'JPY'}
   ];
 
   String get _formattedAmountDisplay {
