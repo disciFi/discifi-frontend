@@ -85,10 +85,7 @@ class _HomeScreenState extends StatelessWidget {
       appBar: AppBar(
         title: const Text(
           'Roast My Wallet',
-          style: TextStyle(
-            color: AppTheme.primaryTextColor,
-            fontWeight: FontWeight.bold,
-          ),
+          style: AppTheme.heading1,
         ),
         backgroundColor: AppTheme.backgroundColor,
         elevation: 0,
@@ -173,52 +170,8 @@ class _HomeScreenState extends StatelessWidget {
         },
         backgroundColor: AppTheme.accentColor,
         child: const Icon(Icons.add, color: Colors.white),
-      ),
+      )
 
-      /*
-      bottom navigation bar:
-      1. home - current screen
-      2. transactions - shows all the transactions
-      3. ai insights - shows all the ai insights aggregated
-      4. budgets - shows the budgets that were created
-      5. settings
-      */
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          // home
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          // transactions
-          BottomNavigationBarItem(
-            icon: Icon(Icons.bar_chart),
-            label: 'Transactions',
-          ),
-          // ai insights
-          BottomNavigationBarItem(
-            icon: Icon(Icons.insights), // Icon for AI Insights
-            label: 'Insights',
-          ),
-          // budgets screen
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_balance_wallet_outlined),
-            label: 'Budgets',
-          ),
-          // settings screen
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings_outlined),
-            label: 'Settings',
-          ),
-        ],
-        // currentIndex: _selectedIndex,
-        selectedItemColor: AppTheme.accentColor,
-        unselectedItemColor: AppTheme.secondaryTextColor,
-        backgroundColor: AppTheme.cardBackgroundColor,
-        type: BottomNavigationBarType.fixed,
-        showUnselectedLabels: true,
-        elevation: 5.0,
-        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
-        unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.normal),
-        // onTap: _onItemTapped,
-      ),
     );
   }
 
@@ -242,16 +195,12 @@ class _HomeScreenState extends StatelessWidget {
           children: [
             Text(
               title,
-              style: TextStyle(color: AppTheme.secondaryTextColor, fontSize: 14.0),
+              style: AppTheme.subheading,
             ),
             const SizedBox(height: 8.0),
             Text(
               amount,
-              style: TextStyle(
-                color: AppTheme.primaryTextColor,
-                fontSize: 28.0,
-                fontWeight: FontWeight.bold,
-              ),
+              style: AppTheme.heading1,
             ),
             const SizedBox(height: 8.0),
             Row(
@@ -260,7 +209,7 @@ class _HomeScreenState extends StatelessWidget {
                 const SizedBox(width: 4.0),
                 Text(
                   comparisonText,
-                  style: TextStyle(color: AppTheme.secondaryTextColor, fontSize: 14.0),
+                  style: AppTheme.subheading,
                 ),
               ],
             ),

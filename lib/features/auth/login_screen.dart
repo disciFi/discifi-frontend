@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:rmw/shared/utils/app_theme.dart';
 import 'auth_controller.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
@@ -47,13 +48,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               const Text(
                 'Welcome Back',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+                style: AppTheme.heading1,
               ),
               const SizedBox(height: 8),
               Text(
                 'Sign in to continue',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16, color: Colors.grey.shade600),
+                style: AppTheme.subheading.copyWith(
+                  color: Colors.grey.shade600,
+                ),
               ),
               const SizedBox(height: 48),
               TextField(
@@ -78,8 +81,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 onPressed: _isLoading ? null : _login,
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 16),
-                  backgroundColor: Colors.black,
-                  foregroundColor: Colors.white,
+                  backgroundColor: AppTheme.accentColor,
+                  foregroundColor: AppTheme.cardBackgroundColor,
                 ),
                 child: _isLoading
                     ? const SizedBox(

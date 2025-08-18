@@ -16,7 +16,7 @@ class AppTheme {
   // --- TEXT STYLES ---
   static const TextStyle heading1 = TextStyle(
     color: primaryTextColor,
-    fontSize: 28.0,
+    fontSize: 24.0,
     fontWeight: FontWeight.bold,
   );
 

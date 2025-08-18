@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../dashboard/home_screen.dart';
+import 'package:rmw/features/main/main_screen.dart';
 import 'login_screen.dart';
 import 'auth_controller.dart';
 
@@ -13,7 +13,7 @@ class AuthWrapper extends ConsumerWidget {
 
     switch (authState) {
       case AuthState.authenticated:
-        return const HomeScreen();
+        return const MainScreen();
       case AuthState.unauthenticated:
         return const LoginScreen();
       case AuthState.unknown:
