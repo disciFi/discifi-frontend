@@ -4,5 +4,7 @@
         "plaintext": false,
         "markdown": false,
         "scminput": false
-    }
+    },
+    "dart.flutterSdkPath": "~/Software/flutter",
+    "java.configuration.updateBuildConfiguration": "interactive"
 }
