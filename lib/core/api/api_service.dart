@@ -6,6 +6,7 @@ import 'package:rmw/core/models/category.dart';
 import 'package:rmw/core/models/account.dart';
 import 'package:rmw/core/models/dashboard_summary.dart';
 import 'package:rmw/core/models/budget.dart';
+import 'package:rmw/core/models/insight.dart';
 
 class ApiService {
   final Dio _dio = Dio();
@@ -58,7 +59,7 @@ class ApiService {
       if (e.response?.statusCode == 401 || e.response?.statusCode == 403) {
         return false;
       }
-      
+
       return false;
     }
   }
@@ -133,6 +134,17 @@ class ApiService {
       return jsonList.map((json) => Budget.fromJson(json)).toList();
     } on DioException {
       throw Exception('Could not load budgets');
+    }
+  }
+
+  // get insights
+  Future<List<Insight>> getInsights() async {
+    try {
+      final response = await _dio.get('$_baseUrl/v1/ai/insights');
+      List<dynamic> jsonList = response.data;
+      return jsonList.map((json) => Insight.fromJson(json)).toList();
+    } on DioException {
+      throw Exception('Could not load AI insights');
     }
   }
 }
