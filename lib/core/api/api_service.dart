@@ -49,6 +49,20 @@ class ApiService {
     }
   }
 
+  // check whether the jwt token is valid or not
+  Future<bool> checkTokenValidity() async {
+    try {
+      await _dio.get('$_baseUrl/v1/users/me');
+      return true;
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 401 || e.response?.statusCode == 403) {
+        return false;
+      }
+      
+      return false;
+    }
+  }
+
   // home screen - spends today, this week and this month
   Future<DashboardSummary> getDashboardSummary() async {
     try {

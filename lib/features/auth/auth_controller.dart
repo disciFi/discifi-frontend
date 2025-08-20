@@ -16,7 +16,12 @@ class AuthController extends StateNotifier<AuthState> {
   Future<void> _checkToken() async {
     final token = await _secureStorage.read(key: 'jwt_token');
     if (token != null) {
-      state = AuthState.authenticated;
+      final isValid = await _ref.read(apiServiceProvider).checkTokenValidity();
+      if (isValid) {
+        state = AuthState.authenticated;
+      } else {
+        await logout();
+      }
     } else {
       state = AuthState.unauthenticated;
     }
