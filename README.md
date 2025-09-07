@@ -22,6 +22,7 @@ features (in-progress):
 - [ ] on-demand insights (if user wants to get scolded or praised over some custom activity).
 - [ ] intensity slider (basically asking AI to be whether your hitler daddy or teddy bear daddy).
 - [ ] word cloud
+
 *(haven't a listed a lot of others which are currently dangling in my mind)*
 
 used:
