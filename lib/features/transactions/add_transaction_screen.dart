@@ -408,7 +408,7 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
             return ListTile(
               title: Text(account.name),
               subtitle: Text(
-                '${account.currency} - Balance: ${account.balance.toStringAsFixed(2) ?? 'N/A'}',
+                '${account.currency} - Balance: ${account.balance.toStringAsFixed(2)}',
               ),
               onTap: () {
                 setState(() => _selectedAccount = account);
