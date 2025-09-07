@@ -147,4 +147,8 @@ class ApiService {
       throw Exception('Could not load AI insights');
     }
   }
+
+  Future<void> logout() async {
+    await _secureStorage.delete(key: 'jwt_token');
+  }
 }

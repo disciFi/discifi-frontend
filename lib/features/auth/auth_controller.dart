@@ -37,7 +37,7 @@ class AuthController extends StateNotifier<AuthState> {
   }
 
   Future<void> logout() async {
-    await _secureStorage.delete(key: 'jwt_token');
+    await _ref.read(apiServiceProvider).logout();
     state = AuthState.unauthenticated;
   }
 }

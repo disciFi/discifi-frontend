@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rmw/core/models/dashboard_summary.dart';
+import 'package:rmw/core/models/account.dart';
 
 import 'package:rmw/features/transactions/add_transaction_screen.dart';
 import 'package:rmw/features/dashboard/dashboard_provider.dart';
+import 'package:rmw/features/transactions/add_transaction_provider.dart';
 import 'package:rmw/shared/utils/app_theme.dart';
+import 'package:rmw/shared/utils/currency_util.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -12,11 +15,12 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final dashboardSummary = ref.watch(dashboardSummaryProvider);
+    final accountsAsyncValue = ref.watch(accountsProvider);
 
     return dashboardSummary.when(
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (error, stack) => Center(child: Text('Error: $error')),
-      data: (summary) => _HomeScreenState(summary),
+      data: (summary) => _HomeScreenState(summary, accountsAsyncValue),
     );
   }
 
@@ -24,7 +28,8 @@ class HomeScreen extends ConsumerWidget {
 
 class _HomeScreenState extends StatelessWidget {
   final DashboardSummary summary;
-  const _HomeScreenState(this.summary);
+  final AsyncValue<List<Account>> accounts;
+  const _HomeScreenState(this.summary, this.accounts);
 
   Map<String, dynamic> _buildComparison(double current, double previous) {
       if (previous == 0 && current > 0) {
@@ -153,6 +158,17 @@ class _HomeScreenState extends StatelessWidget {
               comparisonIcon: todayComparison['icon'],
               comparisonColor: todayComparison['color']
             ),
+
+            const SizedBox(height: 24.0),
+
+            // my accounts
+            const Text("My Accounts", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 12),
+            accounts.when(
+              loading: () => const SizedBox(height: 100, child: Center(child: CircularProgressIndicator())),
+              error: (err, stack) => Text('Error: $err'),
+              data: (accounts) => _buildAccountsList(accounts),
+            ),
           ],
         ),
       ),
@@ -215,6 +231,52 @@ class _HomeScreenState extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildAccountsList(List<Account> accounts) {
+    return SizedBox(
+      height: 120,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: accounts.length,
+        itemBuilder: (context, index) {
+          final account = accounts[index];
+          return _buildAccountCard(account);
+        },
+      ),
+    );
+  }
+
+  Widget _buildAccountCard(Account account) {
+    return Container(
+      width: 150,
+      margin: const EdgeInsets.only(right: 12.0),
+      padding: const EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: AppTheme.cardBackgroundColor,
+        borderRadius: AppTheme.cardBorderRadius,
+        boxShadow: [
+          BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 10, offset: const Offset(0, 4)),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Icon(Icons.account_balance, color: AppTheme.primaryTextColor),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(account.name, style: const TextStyle(fontWeight: FontWeight.bold), overflow: TextOverflow.ellipsis),
+              Text(
+                '${CurrencyUtil.getCurrencySymbol(account.currency)} ${account.balance?.toStringAsFixed(2) ?? '0.00'}',
+                style: const TextStyle(color: AppTheme.secondaryTextColor),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
